@@ -3,8 +3,9 @@ Based on ps3-cloud-drive by mhaqs.
 
 I created this version, because version 1.1.7 by mhaqs was no longer working for me.
 
-You will need the latest ps3toolchain to compile this.
-You will need to create a project and enable the Google Drive API using the Google API console. Enter the client_id and client_secret into the main.cpp file before compilation.
+1. You will need the latest ps3toolchain to compile this.\
+2. You will need to create a project and enable the Google Drive API using the Google API console. 
+	- Enter the client_id and client_secret into the main.cpp file before compilation.
 
 Changes:
 - Removed the need for an SSL certificate.
