@@ -25,7 +25,8 @@
 // for debugging
 #include <iostream>
 
-const std::string token_url = "https://accounts.google.com/o/oauth2/token";
+
+const std::string token_url = "https://www.googleapis.com/oauth2/v4/token";
 const std::string verification_url = "https://www.google.com/device";
 const std::string device_url = "https://accounts.google.com/o/oauth2/device/code";
 
@@ -51,9 +52,9 @@ m_client_secret(client_secret)
 std::string OAuth2::Auth()
 {
     std::string post =
-            "code=" + m_device +
-            "&client_id=" + m_client_id +
-            "&client_secret=" + m_client_secret +
+			"client_id=" + m_client_id +
+			"&client_secret=" + m_client_secret +
+            "&code=" + m_device +
             "&grant_type=http://oauth.net/grant_type/device/1.0";
 
     JsonResponse resp;
@@ -82,11 +83,13 @@ std::string OAuth2::DeviceAuth()
     std::string usercode;
 
     std::string post =
-            "scope=" +
-            http.Escape("https://www.googleapis.com/auth/userinfo.email") + http.Escape(" ") +
-            http.Escape("https://docs.google.com/feeds") + http.Escape(" ") +
-            http.Escape("https://www.googleapis.com/auth/userinfo.profile") +
-            "&client_id=" + m_client_id;
+			"client_id=" + m_client_id +
+			"&scope=" + http.Escape("email profile ") + http.Escape("https://www.googleapis.com/auth/drive.file");
+            // "scope=" +
+            // http.Escape("https://www.googleapis.com/auth/userinfo.email") + http.Escape(" ") +
+            // http.Escape("https://docs.google.com/feeds") + http.Escape(" ") + // Deprecated, but still working
+            // http.Escape("https://www.googleapis.com/auth/userinfo.profile");
+            
 
     http.Post(device_url, post, &resp, Header());
 
